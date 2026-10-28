@@ -1,0 +1,45 @@
+Synthetic local test data only. Not production traffic.
+
+
+> @kendisc/api@1.0.0 test
+> DB_ENV=TEST jest --forceExit --runInBand test/unit/traffic.test.ts
+
+PASS test/unit/traffic.test.ts
+  ✓ category only, no raw path or identity accepted (50 ms)
+  ✓ disabled flag, origin and privacy signals prevent writes (9 ms)
+  ✓ body limit, malformed JSON and storage failure fail safely (8 ms)
+  ✓ /leagues/my-private-slug/events/123 maps to League event detail (1 ms)
+  ✓ /leagues/join/secret-invite maps to Join league
+  ✓ /leagues/x/teams/competitors/123 maps to League competitor detail (1 ms)
+  ✓ /competitors/123/ maps to Competitor detail
+  ✓ /mcbirdle maps to McBirdle (2 ms)
+  ✓ /admin maps to null
+  ✓ /admin/traffic maps to null (1 ms)
+  ✓ /profile maps to null
+  ✓ /sign-in maps to null
+  ✓ /password-reset maps to null (8 ms)
+  ✓ /email-verified maps to null
+  ✓ /leagues/x/settings maps to null
+  ✓ /leagues/x/settings/events maps to null
+  ✓ /unknown maps to null
+  ✓ /leagues/x/unknown maps to null
+  ✓ collector limits repeated submissions (57 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       19 passed, 19 total
+Snapshots:   0 total
+Time:        4.822 s, estimated 5 s
+Ran all test suites matching test/unit/traffic.test.ts.
+Force exiting Jest: Have you considered using `--detectOpenHandles` to detect async operations that kept running after all tests finished?
+PASS: migration, 75 concurrent atomic increments, ranges, sorting, zero-filled dates, 90-day boundary pruning, identity-free schema
+PASS initial load + client navigation/back; 3 events; category-only, no Authorization/Anonymous-ID/Referer
+PASS query-only navigation does not count; reload counts once
+sign in inputs [
+  { type: 'email', placeholder: '', name: 'email' },
+  { type: 'password', placeholder: '', name: 'password' }
+]
+PASS real emulator admin sign-in; guarded dashboard populated, 7-day filter, no mobile horizontal overflow, admin browsing excluded
+PASS signed-out and non-admin API denied
+PASS signed-in non-admin browsing counts category only
+PASS DNT/GPC suppress requests in browser
+PASS empty state
