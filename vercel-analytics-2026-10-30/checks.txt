@@ -1,0 +1,13 @@
+Vercel Web Analytics PR - checks run 2026-10-30 (sandbox, Node v22.23.4, npm 10.9.9)
+
+PASS  npm install @vercel/analytics --workspace=@kendisc/web  (2.0.1)
+PASS  npx prettier --check (packages/web): All matched files use Prettier code style
+PASS  npm run lint -w @kendisc/web (eslint src): 0 errors, 9 warnings (all pre-existing in v2-components, unrelated files)
+PASS  npx tsc --noEmit (packages/web): exit 0
+PASS  npx next build (packages/web): exit 0, full production build, all routes compiled
+PASS  next start smoke test:
+      - GET / -> 200
+      - GET /privacy-policy -> 200, new "5. Analytics" section served (see privacy.png)
+      - @vercel/analytics client bundle present in .next/static/chunks (va.vercel-scripts / _vercel/insights references)
+NOTE  The Analytics component injects /_vercel/insights/script.js client-side in production;
+      no data flows until Web Analytics is enabled in the Vercel dashboard and the app is redeployed.
