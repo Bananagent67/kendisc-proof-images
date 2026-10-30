@@ -1,4 +1,5 @@
 Vercel Web Analytics PR - checks run 2026-10-30 (sandbox, Node v22.23.4, npm 10.9.9)
+Amended commit f262baf (adds AnalyticsTracker with beforeSend query/hash stripping).
 
 PASS  npm install @vercel/analytics --workspace=@kendisc/web  (2.0.1)
 PASS  npx prettier --check (packages/web): All matched files use Prettier code style
@@ -8,6 +9,8 @@ PASS  npx next build (packages/web): exit 0, full production build, all routes c
 PASS  next start smoke test:
       - GET / -> 200
       - GET /privacy-policy -> 200, new "5. Analytics" section served (see privacy.png)
-      - @vercel/analytics client bundle present in .next/static/chunks (va.vercel-scripts / _vercel/insights references)
-NOTE  The Analytics component injects /_vercel/insights/script.js client-side in production;
-      no data flows until Web Analytics is enabled in the Vercel dashboard and the app is redeployed.
+      - @vercel/analytics client bundle and the query-stripping beforeSend present in .next/static/chunks
+NOTE  The Analytics component injects /_vercel/insights/script.js client-side in production.
+      Collection starts on the next deploy if Web Analytics is already enabled on the Vercel
+      project (current state unknown - dashboard sign-in required). If it is not enabled,
+      nothing collects until it is enabled in the dashboard and the app redeploys.
